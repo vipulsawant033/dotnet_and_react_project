@@ -6,7 +6,7 @@ export default function RequireAuth() {
   const { data: user, isLoading } = useUserInfoQuery();
   const location = useLocation();
 
-  if (isLoading) return <Typography variant="h2">loaading ...</Typography>;
+  if (isLoading) return <Typography variant="h2">Loading ...</Typography>;
 
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} />;
