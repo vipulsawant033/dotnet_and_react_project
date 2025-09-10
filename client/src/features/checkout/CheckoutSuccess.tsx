@@ -7,18 +7,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useLocation } from "react-router";
-// import { Order } from "../../app/models/order";
+import type { Order } from "../../app/models/order";
 import {
   currencyFormat,
-  //   formatAddressString,
-  //   formatPaymentString,
+  formatAddressString,
+  formatPaymentString,
 } from "../../lib/util";
+import { format } from "date-fns";
 
 export default function CheckoutSuccess() {
   const { state } = useLocation();
-  //   const order = state.data as Order;
+  const order = state.data as Order;
 
-  //   if (!order) return <Typography>Problem accessing the order</Typography>;
+  if (!order) return <Typography>Problem accessing the order</Typography>;
 
   return (
     <Container maxWidth="md">
@@ -27,7 +28,7 @@ export default function CheckoutSuccess() {
           Thanks for your fake order!
         </Typography>
         <Typography variant="body1" color="textSecondary" gutterBottom>
-          {/* Your order <strong>#{order.id}</strong> will never be processed as */}
+          Your order <strong>#{order.id}</strong> will never be processed as
           this is a fake shop.
         </Typography>
 
@@ -46,7 +47,7 @@ export default function CheckoutSuccess() {
               Order date
             </Typography>
             <Typography variant="body2" fontWeight="bold">
-              {/* {order.orderDate} */}
+              {format(order.orderDate, "dd MMM yyyy")}
             </Typography>
           </Box>
           <Divider />
@@ -55,7 +56,7 @@ export default function CheckoutSuccess() {
               Payment method
             </Typography>
             <Typography variant="body2" fontWeight="bold">
-              {/* {formatPaymentString(order.paymentSummary)} */}
+              {formatPaymentString(order.paymentSummary)}
             </Typography>
           </Box>
           <Divider />
@@ -64,7 +65,7 @@ export default function CheckoutSuccess() {
               Shipping address
             </Typography>
             <Typography variant="body2" fontWeight="bold">
-              {/* {formatAddressString(order.shippingAddress)} */}
+              {formatAddressString(order.shippingAddress)}
             </Typography>
           </Box>
           <Divider />
@@ -73,7 +74,7 @@ export default function CheckoutSuccess() {
               Amount
             </Typography>
             <Typography variant="body2" fontWeight="bold">
-              {/* {currencyFormat(order.total)} */}
+              {currencyFormat(order.total)}
             </Typography>
           </Box>
         </Paper>
@@ -82,8 +83,8 @@ export default function CheckoutSuccess() {
           <Button
             variant="contained"
             color="primary"
-            // component={Link}
-            // to={`/orders/${order.id}`}
+            component={Link}
+            to={`/orders/${order.id}`}
           >
             View your order
           </Button>
